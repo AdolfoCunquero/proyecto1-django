@@ -1,0 +1,43 @@
+{% extends 'master.html' %}
+
+{% block title %}{{ empleado.full_name }}{% endblock title %}
+
+{% block content %}
+    {% include 'includes/header.html'%}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Detalle Persona {{titulo}}</h1>
+            </div>
+        </div>
+        <div class="row pb-4">
+            <div class="col-md-12 mt-4">
+
+
+                <div class="card mx-auto" style="width: 20rem;">
+                    {% if empleado.avatar %}
+                        <img src="{{ empleado.avatar.url }}" class="card-img-top" alt="Avatar">
+                    {% endif%}
+                    <div class="card-body">
+                        <h5 class="card-title">{{empleado.full_name}}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{empleado.last_name}}</li>
+                        <li class="list-group-item">{{empleado.get_job_display}}</li>
+                        <li class="list-group-item">{{empleado.departamento.short_name}}</li>
+                        <li class="list-group-item">
+                            <p><span>Habilidades:</span></p>
+                            <ul>
+                                {% for h in empleado.habilidades.all %}
+                                    <li>
+                                        {{h}}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

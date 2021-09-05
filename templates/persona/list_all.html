@@ -1,0 +1,67 @@
+{% extends 'master.html' %}
+
+{% block title %}Empleados{% endblock title %}
+
+{% block content %}
+
+    {% include 'includes/header.html' %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Listado de empleados</h1>
+            </div>
+        </div>
+        <form method="GET">
+            {% csrf_token %}
+            <div class="row pt-2 pb-2">
+                <div class="col-md-6">
+                    <input type="text" placeholder="Buscar empleado" name="kword" id="kword" class="form-control form-control-sm" />
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-sm btn-primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'includes/table.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                            {% if page_obj.has_previous %}
+                                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            {% endif %}
+                            </li>
+                            
+                            {% for item in paginator.page_range %}
+                                {% ifequal page_obj.number item %}
+                                    <li class="page-item active"><a class="page-link" href="?page={{item}}">{{item}}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{item}}">{{item}}</a></li>
+                                {% endifequal %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content%}

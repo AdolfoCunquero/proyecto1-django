@@ -1,0 +1,22 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nombres</td>
+            <td>Apellidos</td>
+            <td>Departamento</td>
+            <td>Acciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in empleados %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.first_name }}</td>
+                <td>{{ item.last_name }}</td>
+                <td>{{ item.departamento }}</td>
+                <td><a class="btn btn-success btn-sm" href="{% url 'persona_app:detalle_empleado' item.id %}" role="button">Ver</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+{% extends 'master.html' %}
+
+{% block title %}Empleados por departamento {% endblock title %}
+
+{% block content %}
+
+    {% include 'includes/header.html' %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Lista de empleados por departamento</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'includes/table.html' %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock content%}
